@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0f19" />
+  <title>MULAFiT</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Splash: video only -->
+  <div id="splash" class="splash">
+    <video id="splashVideo" class="splashVideo" autoplay muted playsinline>
+      <source src="assets/montage.mp4" type="video/mp4" />
+    </video>
+    <button id="skipSplash" class="skipSplash">Skip</button>
+  </div>
+
+  <!-- Header (aligned same width as cards) -->
+  <header class="topbar">
+    <div class="topbarInner">
+      <div class="brand">
+        <div class="titleWrap">
+          <div class="title">
+            <span class="mula">MULA</span><span class="fit">FiT</span>
+          </div>
+          <div class="subtitle">kickstart your fitness journey</div>
+        </div>
+      </div>
+
+      <button id="exitBtn" class="exitBtn" type="button">Exit</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Plan card -->
+    <section class="card">
+      <div class="row">
+        <h2>Pick your plan</h2>
+        <select id="planSelect" class="select"></select>
+      </div>
+
+      <p class="hint" id="planHint"></p>
+
+      <div class="row" style="margin-top:10px">
+        <div class="row gap">
+          <span class="label">Back-pain friendly</span>
+          <label class="switch" title="Low impact, spine-friendly substitutions">
+            <input id="backPainToggle" type="checkbox" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="weekMeta" id="weekMeta"></div>
+      </div>
+
+      <div class="weekStrip" id="weekStrip"></div>
+      <p class="hint" id="weekHint"></p>
+
+      <div class="pillrow" id="dayPills"></div>
+    </section>
+
+    <section class="grid">
+      <!-- Workout -->
+      <section class="card workout">
+        <div class="row">
+          <h2 id="workoutTitle">Workout</h2>
+          <div class="badge" id="workoutMeta">Day</div>
+        </div>
+
+        <div class="exercise">
+          <!-- ✅ Workout image box (PNG) -->
+          <div class="mediaWrap">
+            <img id="workoutImg" alt="Workout reference" />
+            <div class="mediaFallback" id="mediaFallback">Add a PNG in assets/images/</div>
+          </div>
+
+          <div class="exInfo">
+            <div class="exName" id="exName">Exercise name</div>
+            <div class="exDesc" id="exDesc">How to do it…</div>
+
+            <div class="logRow">
+              <label class="label">Dumbbell (kg)</label>
+              <input id="weightInput" class="input" inputmode="decimal" placeholder="e.g. 8" />
+              <button id="saveWeightBtn" class="btn">Save</button>
+            </div>
+
+            <div class="savedSmall" id="savedWeightText"></div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="controlBlock">
+            <div class="kpiLabel">Reps</div>
+            <div class="kpiRow">
+              <button class="btn ghost" id="repMinus">−</button>
+              <div class="kpi" id="repCount">0</div>
+              <button class="btn ghost" id="repPlus">+</button>
+            </div>
+            <button class="btn small" id="repBeep">🔊 Rep sound</button>
+          </div>
+
+          <div class="controlBlock">
+            <div class="kpiLabel">Sets</div>
+            <div class="kpiRow">
+              <button class="btn ghost" id="setMinus">−</button>
+              <div class="kpi" id="setCount">1</div>
+              <button class="btn ghost" id="setPlus">+</button>
+            </div>
+            <button class="btn small" id="setBeep">🔔 Set sound</button>
+          </div>
+
+          <div class="controlBlock">
+            <div class="kpiLabel">Rest timer</div>
+            <div class="kpiRow">
+              <button class="btn ghost" id="restMinus">−</button>
+              <div class="kpi" id="restTime">60</div>
+              <button class="btn ghost" id="restPlus">+</button>
+            </div>
+            <div class="timerRow">
+              <button class="btn" id="startRest">Start rest</button>
+              <button class="btn ghost" id="stopRest">Stop</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="breath">
+          <div class="row">
+            <h3>Breathing coach</h3>
+            <label class="switch">
+              <input id="breathToggle" type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <p class="hint">When ON: it will say “Inhale…” then “Exhale…” while you work.</p>
+
+          <div class="row gap">
+            <div class="field">
+              <div class="label">Inhale (sec)</div>
+              <input id="inhaleSec" class="input" inputmode="numeric" value="2" />
+            </div>
+            <div class="field">
+              <div class="label">Exhale (sec)</div>
+              <input id="exhaleSec" class="input" inputmode="numeric" value="2" />
+            </div>
+          </div>
+
+          <div class="row gap">
+            <button class="btn" id="startBreath">Start coach</button>
+            <button class="btn ghost" id="stopBreath">Stop</button>
+            <button class="btn ghost" id="testVoice">Test voice</button>
+          </div>
+        </div>
+
+        <div class="navRow">
+          <button class="btn ghost" id="prevEx">← Prev</button>
+          <button class="btn" id="nextEx">Next →</button>
+        </div>
+      </section>
+
+      <!-- Logs -->
+      <section class="card logs">
+        <h2>Progress</h2>
+
+        <div class="logCard">
+          <h3>Body weight (weekly)</h3>
+          <div class="row gap">
+            <input id="bodyWeightInput" class="input" inputmode="decimal" placeholder="e.g. 78.5" />
+            <button id="saveBodyWeightBtn" class="btn">Save</button>
+          </div>
+          <div class="hint" id="bodyWeightList"></div>
+        </div>
+
+        <div class="logCard">
+          <h3>Saved dumbbell weights</h3>
+          <div class="hint" id="weightsList"></div>
+        </div>
+
+        <div class="logCard">
+          <h3>Tools</h3>
+          <div class="row gap">
+            <button class="btn ghost" id="exportBtn">Export data</button>
+            <button class="btn danger" id="resetBtn">Reset</button>
+          </div>
+          <p class="hint">Export creates a JSON file you can keep as backup.</p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Offline • No ads • Saved on your phone</span>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js');
+    }
+  </script>
+</body>
+</html>
